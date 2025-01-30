@@ -1,8 +1,7 @@
 class ExchangesController < ApplicationController
-  before_action :require_user_info, only: [:new, :create]
 
   def index
-    @exchanges = Exchange.where(status: "public")
+    @exchanges = Exchange.where(status: :available)
   end
 
   def show
@@ -42,9 +41,4 @@ class ExchangesController < ApplicationController
     params.require(:exchange).permit(:amount, :exchange_type, :address)
   end
 
-  def require_user_info
-    unless current_user.has_complete_info?
-      redirect_to new_user_path, alert: "Por favor, complete sus datos antes de crear una oferta"
-    end
-  end
 end

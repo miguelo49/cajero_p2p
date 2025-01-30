@@ -17,6 +17,8 @@ gem "stimulus-rails"
 # Use Tailwind CSS [https://github.com/rails/tailwindcss-rails]
 gem "tailwindcss-rails"
 
+gem 'devise'
+
 gem 'sqlite3', '~> 2.3.1'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
@@ -65,4 +67,8 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+end
+
+group :development, :test do
+  gem "byebug", platforms: %i[mri mingw x64_mingw]
 end

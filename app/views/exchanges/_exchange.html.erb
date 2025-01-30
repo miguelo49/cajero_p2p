@@ -2,11 +2,11 @@
   <h2 class="text-xl font-semibold"><%= exchange.amount %> <%= exchange.exchange_type %></h2>
   <p><%= exchange.address %></p>
   
-  <% if exchange.status == "public" %>
-    <%= button_to "Intercambiar", exchange_path(exchange), method: :patch, class: "btn btn-secondary mt-2", data: { turbo_frame: "_top" } %>
-  <% else %>
+  <% if exchange.available? && current_user.present?%>
+    <%= button_to "Intercambiar", exchange_path(exchange, exchange: { status: "pending", buyer_id: current_user.id  }), method: :patch, class: "btn btn-secondary mt-2", data: { turbo_frame: "_top" } %>
+  <% elsif  exchange.pending? %>
     <div class="flex justify-between mt-2">
-      <%= button_to "Intercambio concretado", complete_exchange_path(exchange), method: :patch, class: "btn btn-success" %>
+      <%= button_to "Intercambio concretado", exchange_path(exchange, exchange: { status: "completed" }), method: :patch, class: "btn btn-success" %>
       <%= link_to "Contactar por WhatsApp", "https://wa.me/#{exchange.user.phone}", class: "btn btn-primary", target: "_blank" %>
     </div>
   <% end %>

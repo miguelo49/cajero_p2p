@@ -6,9 +6,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to root_path, notice: "Datos guardados exitosamente"
+      log_in @user
+      redirect_to exchanges_path
     else
-      render :new
+      render 'new'
     end
   end
 

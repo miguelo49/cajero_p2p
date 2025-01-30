@@ -2,28 +2,35 @@
   <div class="bg-white shadow rounded-lg p-4">
     <h2 class="text-xl font-semibold mb-4">Datos del usuario</h2>
     
-    <%= form_with(model: @user, local: true) do |f| %>
-      <div class="mb-4">
-        <%= f.label :name, "Nombre", class: "block text-sm font-medium text-gray-700" %>
-        <%= f.text_field :name, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+    <h1>Sign Up</h1>
+    <%= form_with(url: signup_path, local: true) do |f| %>
+      <div class="field">
+        <%= f.label :name %>
+        <%= f.text_field :name %>
       </div>
-      
-      <div class="mb-4">
-        <%= f.label :email, "Correo electrónico", class: "block text-sm font-medium text-gray-700" %>
-        <%= f.email_field :email, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+      <div class="field">
+        <%= f.label :email %>
+        <%= f.email_field :email %>
       </div>
-      
-      <div class="mb-4">
-        <%= f.label :bank_account, "Cuenta bancaria", class: "block text-sm font-medium text-gray-700" %>
-        <%= f.text_field :bank_account, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+      <div class="field">
+        <%= f.label :password %>
+        <%= f.password_field :password %>
       </div>
-      
-      <div class="mb-4">
-        <%= f.label :address, "Dirección", class: "block text-sm font-medium text-gray-700" %>
-        <%= f.text_field :address, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+      <div class="field">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation %>
       </div>
-      
-      <%= f.submit "Guardar", class: "btn btn-primary" %>
+      <div class="field">
+        <%= f.label :address %>
+        <%= f.text_field :address %>
+      </div>
+      <div class="field">
+        <%= f.label :phone %>
+        <%= f.text_field :phone %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Sign up" %>
+      </div>
     <% end %>
   </div>
 <% end %>
