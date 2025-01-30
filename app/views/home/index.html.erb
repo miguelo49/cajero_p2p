@@ -1,0 +1,11 @@
+<div class="container mx-auto px-4">
+  <h1 class="text-2xl font-bold mb-4">Intercambios disponibles</h1>
+  
+  <%= turbo_frame_tag "exchanges_list" do %>
+    <%= render partial: "exchanges/exchange", collection: @exchanges %>
+  <% end %>
+  
+  <%= link_to "Nueva oferta", new_exchange_path, class: "btn btn-primary", data: { turbo_frame: "modal" } %>
+</div>
+
+<%= turbo_frame_tag "modal" %>

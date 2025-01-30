@@ -1,44 +1,50 @@
 class ExchangesController < ApplicationController
+  before_action :require_user_info, only: [:new, :create]
+
   def index
-    @exchanges = Exchange.available
-    @exchanges = @exchanges.by_amount_range(params[:min_amount], params[:max_amount]) if params[:min_amount].present? || params[:max_amount].present?
-    @exchanges = @exchanges.by_location(params[:location]) if params[:location].present?
-    @locations = Exchange.distinct.pluck(:location)
+    @exchanges = Exchange.where(status: "public")
+  end
+
+  def show
+    @exchange = Exchange.find(params[:id])
   end
 
   def new
-    @exchange = current_user.exchanges.new
+    @exchange = Exchange.new
   end
 
   def create
-    @exchange = current_user.exchanges.new(exchange_params)
+    @exchange = current_user.exchanges.build(exchange_params)
+    @exchange.status = "public"
+
     if @exchange.save
-      redirect_to @exchange, notice: "Exchange was successfully created."
+      redirect_to root_path, notice: "Oferta creada exitosamente"
     else
       render :new
     end
   end
 
   def update
-    if @exchange.update(exchange_params)
-      redirect_to @exchange, notice: "Exchange was successfully updated."
-    else
-      render :edit
-    end
+    @exchange = Exchange.find(params[:id])
+    @exchange.update(status: "private")
+    redirect_to root_path, notice: "Intercambio iniciado"
   end
 
-  def destroy
-    @exchange.destroy
-    redirect_to exchanges_url, notice: "Exchange was successfully destroyed."
+  def complete
+    @exchange = Exchange.find(params[:id])
+    @exchange.update(status: "completed")
+    redirect_to root_path, notice: "Intercambio completado"
   end
 
   private
 
-  def set_exchange
-    @exchange = Exchange.find(params[:id])
+  def exchange_params
+    params.require(:exchange).permit(:amount, :exchange_type, :address)
   end
 
-  def exchange_params
-    params.require(:exchange).permit(:amount, :exchange_type, :location, :status)
+  def require_user_info
+    unless current_user.has_complete_info?
+      redirect_to new_user_path, alert: "Por favor, complete sus datos antes de crear una oferta"
+    end
   end
 end

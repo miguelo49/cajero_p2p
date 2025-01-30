@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root "exchanges#index"
-  resources :exchanges, only: [:index]
-  resources :users, only: [:show, :edit, :update]
+  root 'home#index'
+  
+  resources :exchanges, only: [:new, :index, :show, :create]
+  resources :users, only: [:new, :create, :edit, :update]
 end

@@ -1,0 +1,24 @@
+<%= turbo_frame_tag "modal" do %>
+  <div class="bg-white shadow rounded-lg p-4">
+    <h2 class="text-xl font-semibold mb-4">Nueva oferta</h2>
+    
+    <%= form_with(model: @exchange, local: true) do |f| %>
+      <div class="mb-4">
+        <%= f.label :amount, "Monto", class: "block text-sm font-medium text-gray-700" %>
+        <%= f.number_field :amount, step: 0.01, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+      </div>
+      
+      <div class="mb-4">
+        <%= f.label :exchange_type, "Tipo de intercambio", class: "block text-sm font-medium text-gray-700" %>
+        <%= f.select :exchange_type, options_for_select([["Efectivo a virtual", "cash_to_virtual"], ["Virtual a efectivo", "virtual_to_cash"]]), {}, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+      </div>
+      
+      <div class="mb-4">
+        <%= f.label :address, "Dirección", class: "block text-sm font-medium text-gray-700" %>
+        <%= f.text_field :address, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+      </div>
+      
+      <%= f.submit "Crear oferta", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+<% end %>
