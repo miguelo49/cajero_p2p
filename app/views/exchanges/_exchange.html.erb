@@ -3,15 +3,19 @@
     <span class="text-green-500"><%= number_to_currency(exchange.amount, unit: "$ ", precision: 0, delimiter: ".") %></span>
     <%= t("activerecord.attributes.exchange.exchange_type.#{exchange.exchange_type}") %>
   </h2>
-  <p><%= exchange.user.name %></p>
+  <% if current_user.id == exchange.user.id && exchange.buyer.present? %>
+   <p>Interesado: <%= exchange.buyer.name %></p>
+  <% elsif current_user.id != exchange.user.id%>
+    <p>Ofertante: <%= exchange.user.name %></p>
+  <% end %>
   <p>🌍 <%= exchange.address %></p>
   
-  <% if exchange.available? && current_user.present?%>
+  <% if exchange.available? && current_user.present? && current_user.id != exchange.user.id%>
     <%= button_to "Intercambiar", exchange_path(exchange, exchange: { status: "pending", buyer_id: current_user.id  }), method: :patch, class: "btn btn-secondary mt-2", data: { turbo_frame: "_top" } %>
   <% elsif  exchange.pending? %>
-    <div class="flex justify-between mt-2">
-      <%= button_to "Intercambio concretado", exchange_path(exchange, exchange: { status: "completed" }), method: :patch, class: "btn btn-success" %>
-      <%= link_to "Contactar por WhatsApp", "https://wa.me/#{exchange.user.phone}", class: "btn btn-primary", target: "_blank" %>
+    <div class="flex justify-between mt-2 space-x-4">
+      <%= link_to "Contactar por WhatsApp", "https://wa.me/#{exchange.user.phone}", class: "btn btn-success ", target: "_blank" %>
+      <%= button_to "Intercambio concretado", exchange_path(exchange, exchange: { status: "completed" }), method: :patch, class: "btn btn-primary " if current_user.id == exchange.user.id %>
     </div>
   <% end %>
 </div>

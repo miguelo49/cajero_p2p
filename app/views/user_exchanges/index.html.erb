@@ -1,0 +1,44 @@
+<div class="bg-gradient-to-r from-blue-100 via-blue-200 to-blue-300 min-h-screen">
+  <div class="container mx-auto px-4 py-6">
+    <h1 class="text-2xl font-bold mb-6 text-center text-blue-600">Mis intercambios</h1>
+
+    <div>
+      <h2 class="text-2xl font-bold mb-6 text-center text-blue-600">Pendiente de reunirse con interesado</h2>
+
+      <%= turbo_frame_tag "pending_exchanges_list" do %>
+      <div class="space-y-4 max-h-60 overflow-y-auto">
+        <% pending_exchanges = @exchanges.where(status: :pending) %>
+        <% if pending_exchanges.any? %>
+        <% pending_exchanges.each do |exchange| %>
+          <%= render partial: "exchanges/exchange", locals: { exchange: exchange } %>
+        <% end %>
+        <% else %>
+        <p class="text-center text-gray-500">No hay intercambios por concretar.</p>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+
+    <div>
+      <h1 class="text-2xl font-bold mb-6 text-center text-blue-600">Disponibles para los otros usuarios</h1>
+
+      <%= turbo_frame_tag "exchanges_list" do %>
+      <% available_exchanges = @exchanges.where(status: :available) %>
+        <div class="space-y-4 max-h-60 overflow-y-auto">
+          <% if available_exchanges.any? %>
+            <% available_exchanges.each do |exchange| %>
+              <%= render partial: "exchanges/exchange", locals: { exchange: exchange } %>
+            <% end %>
+          <% else %>
+            <p class="text-center text-gray-500">No hay intercambios disponibles.</p>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+  <div class="fixed bottom-4 justify-between w-full flex space-x-4 px-2">
+    <%= link_to "Ver ofertas Disponibles", exchanges_path, class: "btn btn-primary bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-lg" %>
+    <%= link_to "Nueva oferta", new_exchange_path, class: "btn btn-primary bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-lg" %>
+  </div>
+</div>

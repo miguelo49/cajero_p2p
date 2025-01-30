@@ -1,4 +1,5 @@
 class ExchangesController < ApplicationController
+  before_action :authenticate_user!
 
   def index
     @pending_exchanges = Exchange.where(status: :pending, buyer_id: current_user.id)
@@ -27,7 +28,6 @@ class ExchangesController < ApplicationController
   def update
     @exchange = Exchange.find(params[:id])
     exchange_params = params.require(:exchange).permit(:status)
-    byebug
     exchange_params = exchange_params.merge(buyer_id: current_user.id) if exchange_params[:status] == "pending"
     @exchange.update(exchange_params)
     redirect_to exchanges_path, notice: "Intercambio iniciado"

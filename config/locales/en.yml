@@ -32,10 +32,17 @@ en:
   activerecord:
     attributes:
       exchange:
-        exchange_type:
-          cash_to_virtual: "Efectivo a Virtual"
-          virtual_to_cash: "Virtual a Efectivo"
-        status:
-          available: "Disponible"
-          pending: "Pendiente"
-          completed: "Completado"
+      exchange_type:
+        cash_to_virtual: "Efectivo a Virtual"
+        virtual_to_cash: "Virtual a Efectivo"
+      status:
+        available: "Disponible"
+        pending: "Pendiente"
+        completed: "Completado"
+      user:
+        name: "Nombre"
+        email: "Correo Electrónico"
+        password: "Contraseña"
+        password_confirmation: "Confirmación de Contraseña"
+        address: "Dirección"
+        phone: "Teléfono"
