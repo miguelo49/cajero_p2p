@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Prerrequisitos
 
-Things you may want to cover:
+Asegúrate de tener instalados los siguientes componentes:
 
-* Ruby version
+- Ruby 3.2.2 (2023-03-30 revision e51014f9c0) [x86_64-linux]
+- Rails (versión 6.0 o superior)
+- SQLite3
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Configuración Inicial
