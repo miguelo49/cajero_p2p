@@ -29,3 +29,13 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    attributes:
+      exchange:
+        exchange_type:
+          cash_to_virtual: "Efectivo a Virtual"
+          virtual_to_cash: "Virtual a Efectivo"
+        status:
+          available: "Disponible"
+          pending: "Pendiente"
+          completed: "Completado"

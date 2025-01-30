@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
   resources :exchanges, only: [:index, :new, :update, :create]
+  resources :user_exchanges, only: [:index]
   resources :users, only: [:new, :create]
 end
