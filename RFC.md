@@ -4,7 +4,7 @@
 
 Este documento detalla las mejoras necesarias para robustecer el MVP y optimizar su funcionalidad. Actualmente, la aplicación permite a los usuarios registrarse, crear ofertas, visualizar las propias y las de otros, así como aceptar una oferta. La prioridad fue desarrollar lo esencial para validar el concepto, dejando para futuras iteraciones aspectos que mejoren la experiencia del usuario.
 
-## 2. Mejoras y Desafíos
+## 2. Mejoras y Desafíos Para una proxima iteración
 
 ### 2.1. Organización de las ofertas
 
