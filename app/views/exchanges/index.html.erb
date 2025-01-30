@@ -1,4 +1,13 @@
-<div>
-  <h1 class="font-bold text-4xl">Exchanges#index</h1>
-  <p>Find me in app/views/exchanges/index.html.erb</p>
+<div class="container mx-auto px-4 py-6">
+  <h1 class="text-2xl font-bold mb-4 text-center">Intercambios disponibles</h1>
+  
+  <%= turbo_frame_tag "exchanges_list" do %>
+    <div class="space-y-4">
+      <%= render partial: "exchanges/exchange", collection: @exchanges %>
+    </div>
+  <% end %>
+  
+  <div class="fixed bottom-4 right-4">
+    <%= link_to "Nueva oferta", new_exchange_path, class: "btn btn-primary bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-lg" %>
+  </div>
 </div>

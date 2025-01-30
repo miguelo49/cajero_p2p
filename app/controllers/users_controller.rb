@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new(user_params.merge(password: "123456", password_confirmation: "123456"))
     if @user.save
       log_in @user
       redirect_to exchanges_path

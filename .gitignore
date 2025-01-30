@@ -7,6 +7,10 @@
 # Ignore bundler config.
 /.bundle
 
+db/development.sqlite3
+db/development.sqlite3-shm
+db/development.sqlite3-wal
+
 # Ignore all environment files.
 /.env*
 
@@ -35,3 +39,7 @@
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
+db/development.sqlite3
+
+
+.byebug_history

@@ -1,7 +1,7 @@
 class ExchangesController < ApplicationController
 
   def index
-    @exchanges = Exchange.where(status: :available)
+    @exchanges = Exchange.where(status: :available).where.not(user: current_user)
   end
 
   def show
@@ -14,25 +14,26 @@ class ExchangesController < ApplicationController
 
   def create
     @exchange = current_user.exchanges.build(exchange_params)
-    @exchange.status = "public"
+    @exchange.status = "available"
 
     if @exchange.save
-      redirect_to root_path, notice: "Oferta creada exitosamente"
+      redirect_to exchanges_path, notice: "Oferta creada exitosamente"
     else
       render :new
     end
   end
 
   def update
+    byebug
     @exchange = Exchange.find(params[:id])
-    @exchange.update(status: "private")
-    redirect_to root_path, notice: "Intercambio iniciado"
+    @exchange.update(status: :pending)
+    redirect_to exchanges_path, notice: "Intercambio iniciado"
   end
 
   def complete
     @exchange = Exchange.find(params[:id])
-    @exchange.update(status: "completed")
-    redirect_to root_path, notice: "Intercambio completado"
+    @exchange.update(status: :completed)
+    redirect_to exchanges_path, notice: "Intercambio completado"
   end
 
   private

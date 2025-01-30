@@ -3,9 +3,10 @@ class SessionsController < ApplicationController
   end
 
   def create
-    byebug
-    user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.authenticate(params[:session][:password])
+    user = User.find_by(email: params[:email].downcase)
+
+    
+    if user
       log_in user
       redirect_to exchanges_path
     else
