@@ -19,7 +19,7 @@ gem "tailwindcss-rails"
 
 gem 'devise'
 
-gem 'sqlite3', '~> 2.3.1'
+gem 'sqlite3', '~> 2.5.0'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
